@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your profile – Secura GE</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('sg_theme')||'dark'}catch(e){}</script>
+</head>
+<body class="frame app-page account-page">
+<a class="skip" href="#main">Skip to main content</a>
+<header class="app-header">
+  <a class="logo" href="/"><img src="/logo.png" width="28" height="28" alt="">Secura<span>GE</span></a>
+  <nav aria-label="Main navigation"><a href="/dashboard.html">My sites</a><a href="/profile.html" aria-current="page">Your profile</a></nav>
+  <div class="acct"><div id="prefs" class="prefs"></div><button class="ghost" id="logout">Log out</button></div>
+</header>
+<main id="main" class="app-main account-main" data-views>
+  <div class="section-heading page-intro"><div><h1>Your profile</h1><p>Manage your details, alerts and account security.</p></div></div>
+  <div class="view-tabs account-tabs" role="tablist" aria-label="Account settings">
+    <a data-tab="profile" href="#profile">Profile</a>
+    <a data-tab="sms" href="#sms">SMS verification</a>
+    <a data-tab="security" href="#security">Security</a>
+    <a data-tab="data" href="#data">Account data</a>
+  </div>
+  <p id="pMsg" class="account-feedback" role="status"></p>
+  <section id="account-profile" data-view="profile">
+    <div class="account-grid">
+      <aside class="studio-card identity-card">
+        <div class="bigavatar" id="bigAvatar" aria-hidden="true"></div>
+        <div><h2 id="accountName"></h2><p class="muted small" id="emailLine"></p></div>
+        <span class="app-pill" id="planLine" data-state="unknown"></span>
+        <button class="ghost" id="pickPhoto" type="button">Change photo</button>
+        <input type="file" id="photo" accept="image/*" hidden>
+      </aside>
+      <form class="studio-card account-form" id="pForm">
+        <div class="section-heading"><h2>Personal details</h2></div>
+        <div class="field-grid">
+          <label>First name<input id="firstName" autocomplete="given-name" required></label>
+          <label>Last name<input id="lastName" autocomplete="family-name"></label>
+          <label>Company name<input id="company" autocomplete="organization"></label>
+          <label>Company type<select id="companyType"></select></label>
+          <label>Company size<select id="companySize"></select></label>
+          <label>Your role<select id="role"></select></label>
+        </div>
+        <div class="account-actions"><button>Save changes</button></div>
+      </form>
+    </div>
+  </section>
+  <section id="account-sms" data-view="sms" hidden>
+    <div class="account-grid">
+      <div class="studio-card account-context">
+        <div class="feature-symbol" aria-hidden="true">#</div>
+        <h2>SMS verification</h2>
+        <p class="muted">Verify the mobile number that will receive your monitoring alerts.</p>
+        <div id="smsState" class="app-pill" role="status"></div>
+      </div>
+      <div class="studio-card account-form">
+        <form id="phoneForm">
+          <h2>Mobile number</h2>
+          <label>Mobile number (for alerts)<input id="phone" inputmode="tel" autocomplete="tel" placeholder="+995 599 123 456"></label>
+          <button type="button" id="sendPhone">Send verification code</button>
+          <button class="ghost">Save number</button>
+        </form>
+        <form id="smsForm" class="stacked-form" hidden>
+          <label>Security code<input name="code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" pattern="[0-9]{6}" required></label>
+          <button>Verify mobile number</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section id="account-security" data-view="security" hidden>
+    <div id="secCard" data-security-mode="password">
+      <div class="view-tabs security-mobile-tabs" role="group" aria-label="Security">
+        <button type="button" data-security="password" aria-pressed="true">Password and sessions</button>
+        <button type="button" data-security="mfa" aria-pressed="false">Two-factor authentication</button>
+      </div>
+      <div class="notice" id="verNotice" hidden><span id="verifyMessage">Your email is not confirmed yet.</span> <button type="button" class="ghost" id="resendBtn">Resend confirmation email</button></div>
+      <div class="account-grid security-grid">
+        <section class="studio-card account-form" data-security-panel="password">
+          <div class="section-heading"><h2>Password and sessions</h2></div>
+          <form id="pwForm">
+            <label id="curLabel">Current password<input id="curPw" type="password" autocomplete="current-password"></label>
+            <label>New password<input id="newPw" type="password" autocomplete="new-password" minlength="10" maxlength="128" required></label>
+            <p class="err" id="pwMsg" role="status"></p>
+            <button>Change password</button>
+          </form>
+          <div class="stacked-form"><button type="button" class="ghost" id="logoutAll">Log out of all devices</button></div>
+        </section>
+        <section class="studio-card account-form" data-security-panel="mfa">
+          <div class="section-heading"><h2>Two-factor authentication</h2><span id="mfaState" class="app-pill" role="status"></span></div>
+          <p class="muted">Use a passkey to confirm on your device when you sign in.</p>
+          <form id="mfaSetup">
+            <label data-password>Current password<input name="password" type="password" autocomplete="current-password"></label>
+            <label id="mfaMigrationCode" hidden>Authenticator or recovery code<input name="code" maxlength="24" autocomplete="one-time-code"></label>
+            <button class="ghost" id="mfaSetupAction">Set up a passkey</button>
+          </form>
+          <div id="mfaRecovery" class="recovery-panel" hidden><p>Save these one-time recovery codes somewhere safe.</p><pre id="recoveryCodes"></pre></div>
+          <form id="mfaDisable" hidden>
+            <label data-password>Current password<input name="password" type="password" autocomplete="current-password"></label>
+            <label><span id="disableMfaLabel">Security code</span><input name="code" maxlength="24" autocomplete="one-time-code" required></label>
+            <button class="ghost">Disable MFA</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </section>
+  <section id="account-data" data-view="data" hidden>
+    <div class="account-grid security-grid">
+      <section class="studio-card account-context">
+        <div class="feature-symbol" aria-hidden="true">↓</div>
+        <h2>Export account data</h2>
+        <p class="muted">Download a copy of your account data.</p>
+        <a href="/api/account/export" class="btn ghost" download>Download account data</a>
+      </section>
+      <section class="studio-card account-form">
+        <h2>Deactivate account</h2>
+        <p class="muted">Pause your account and its monitors. Sign in and confirm your email to reactivate it.</p>
+        <details><summary>Deactivate account</summary>
+          <form id="deactivateAccount">
+            <label data-password>Current password<input name="password" type="password" autocomplete="current-password"></label>
+            <label id="deactivateMfa" hidden><span id="deactivateMfaLabel">Security code</span><input name="code" autocomplete="one-time-code"></label>
+            <button class="ghost danger-action">Deactivate my account</button>
+          </form>
+        </details>
+        <p id="deactivateState" role="status"></p>
+      </section>
+      <section class="studio-card account-form danger-card">
+        <h2>Delete account</h2>
+        <p class="muted">This permanently removes your account and monitored sites.</p>
+        <details><summary>Delete account</summary>
+          <form id="deleteAccount">
+            <label>Confirm your account email<input name="email" type="email" autocomplete="email" required></label>
+            <label data-password>Current password<input name="password" type="password" autocomplete="current-password"></label>
+            <label id="deleteMfa" hidden><span id="deleteMfaLabel">Security code</span><input name="code" autocomplete="one-time-code"></label>
+            <button class="ghost danger-action">Permanently delete my account</button>
+          </form>
+        </details>
+        <p id="accountState" role="status"></p>
+      </section>
+    </div>
+  </section>
+</main>
+<script type="module" src="/src/profile.js"></script>
+</body>
+</html>

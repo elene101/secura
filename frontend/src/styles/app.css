@@ -1,0 +1,58 @@
+.app-page { --panel-pad: clamp(16px, 2.4vw, 28px); }
+.app-page h1, .app-page h2, .app-page h3 { line-height: 1.2; letter-spacing: -.025em; }
+.app-page h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 3.4rem); }
+.app-page h2 { margin: 0 0 14px; font-size: 1.25rem; }
+.app-page h3 { margin: 12px 0 8px; font-size: 1rem; }
+.app-page p { margin: 0 0 10px; }
+.app-page .app-header {
+  position: static; width: auto; max-width: none; margin: 0; border-width: 0 0 1px;
+  border-radius: 0; padding: 12px clamp(14px, 4vw, 48px); background: var(--bg); flex-wrap: wrap;
+}
+.app-header nav { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.app-header nav a { color: var(--text); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.app-main { max-width: 1280px; padding: 32px clamp(12px, 3vw, 34px) 60px; margin: auto; }
+.app-intro { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: center; margin-bottom: 18px; }
+.app-intro p { margin-top: 8px; }
+.app-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin: 12px 0 18px; }
+.app-summary div { padding: 12px 14px; border: 1px solid var(--line); border-radius: 9px; background: var(--surf); }
+.app-summary strong { display: block; font-size: clamp(1.25rem, 3vw, 1.9rem); line-height: 1.2; }
+.app-summary span, .app-caption { color: var(--mute); font-size: .86rem; }
+.app-layout { display: grid; grid-template-columns: minmax(235px, .8fr) minmax(0, 1.45fr); gap: 16px; align-items: start; }
+.app-secondary { margin-top: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.app-card { background: var(--surf); border: 1px solid var(--line); border-radius: 12px; padding: var(--panel-pad); min-width: 0; overflow-wrap: anywhere; }
+.app-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 12px 0; }
+.app-form label, .app-settings label { display: grid; gap: 4px; font-size: .85rem; }
+.app-form label { flex: 1 1 120px; }
+.app-form input, .app-form select, .app-settings input, .app-settings select { width: 100%; min-width: 0; }
+.app-monitor { margin-top: 8px; padding: 10px 12px; display: grid; gap: 4px; width: 100%; text-align: left; border: 1px solid var(--line); border-radius: 7px; background: var(--bg); color: var(--text); }
+.app-monitor[aria-current="true"] { border-color: var(--accent2); }
+.app-monitor code { font-size: .78rem; overflow-wrap: anywhere; }
+.app-actions { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; margin: 10px 0; }
+.app-settings { margin-top: 12px; }
+.app-settings details, .app-card details { border-top: 1px solid var(--line); padding: 10px 0; }
+.app-card summary { font-weight: 600; cursor: pointer; }
+.app-settings .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 8px 0; }
+.app-settings fieldset { border: 1px solid var(--line); border-radius: 7px; padding: 8px; min-width: 0; }
+.app-settings .member-check { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.app-settings input[type="checkbox"] { width: auto; }
+.app-list { list-style: none; padding: 0; margin: 0; }
+.app-list li { border-top: 1px solid var(--line); padding: 7px 0; }
+.app-pill { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; font-size: .8rem; font-weight: 600; }
+.app-pill[data-state="up"], .app-pill[data-state="accepted"] { color: var(--ok); }
+.app-pill[data-state="down"], .app-pill[data-state="failed"] { color: var(--bad); }
+.app-pill[data-state="stale"], .app-pill[data-state="regional"] { color: var(--warn); }
+.app-link { display: inline-block; text-decoration: none; }
+.app-main .chart { margin-top: 8px; }
+.app-readable { max-width: 840px; }
+.app-readable section { margin-top: 16px; }
+.app-readable h2 { margin: 0 0 10px; }
+.app-readable ul { padding-left: 22px; }
+.app-share-link { width: min(100%, 480px); }
+#feedback[data-error="true"] { color: var(--bad); }
+@media(max-width: 740px) {
+  .app-layout, .app-secondary { grid-template-columns: 1fr; }
+  .app-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .app-header nav { order: 3; width: 100%; }
+  .app-main { padding-top: 18px; }
+}
+@media(max-width: 360px) { .app-settings .row { grid-template-columns: 1fr; } }

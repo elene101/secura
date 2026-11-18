@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Service status – Secura GE</title><link rel="icon" href="/favicon-32.png">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('sg_theme')||'dark'}catch(e){}</script></head>
+<body class="app-page frame info-page status-page">
+<a class="skip" href="#main">Skip to main content</a>
+<header class="app-header">
+  <a class="logo" href="/"><img src="/logo.png" width="28" height="28" alt="">Secura<span>GE</span></a>
+  <nav><a href="/">Link scanner</a><a href="/dashboard.html">My sites</a><a href="/status.html">Service status</a></nav>
+  <div id="prefs" class="prefs"></div>
+</header>
+<main id="main" class="app-main app-readable">
+  <div class="section-heading page-intro"><h1 id="statusTitle">Service status</h1></div>
+  <section id="health" class="app-card" aria-live="polite">
+    <div class="status-indicator" aria-hidden="true"><span></span></div>
+    <div><h2>Monitoring scheduler</h2><p id="statusText" class="app-pill" data-state="unknown">Loading…</p><p id="lastSweep" class="muted"></p></div>
+  </section>
+  <section id="sharedReport" class="app-card" aria-live="polite" hidden></section>
+</main>
+<script type="module" src="/src/public-info.js"></script>
+</body></html>

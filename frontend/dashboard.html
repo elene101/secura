@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>My sites – Secura GE</title>
+<link rel="icon" href="/favicon-32.png">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('sg_theme')||'dark'}catch(e){}</script>
+</head>
+<body class="app-page frame dashboard-page">
+<a class="skip" href="#main">Skip to main content</a>
+<header class="app-header">
+  <a class="logo" href="/"><img src="/logo.png" width="28" height="28" alt="">Secura<span>GE</span></a>
+  <nav aria-label="Dashboard navigation"><a href="/#scan">Link scanner</a><a href="/profile.html">Your profile</a><a id="adminLink" href="/admin.html" hidden>Admin panel</a></nav>
+  <div id="prefs" class="prefs"></div>
+</header>
+<main id="main" class="app-main" data-views>
+  <div class="section-heading page-intro">
+    <div><h1>My sites</h1><p class="muted">Monitor availability, security changes and alerts.</p></div>
+    <a class="ghost app-link" href="/status.html">Service status</a>
+  </div>
+  <p id="feedback" role="status"></p>
+  <div id="verifyGate" class="notice" hidden><span id="verifyMessage">Your email is not confirmed yet.</span> <button id="resend" class="ghost">Resend</button></div>
+  <section class="notice invitation-notice" id="inviteNotice" hidden>
+    <p id="inviteMessage" role="status"></p>
+    <button type="button" id="inviteAccept" hidden>Accept invitation</button>
+    <button type="button" class="ghost" id="inviteDecline" hidden>Decline invitation</button>
+    <button type="button" class="ghost" id="inviteSwitch" hidden>Use another account</button>
+    <button type="button" class="ghost" id="inviteDismiss">Dismiss</button>
+  </section>
+  <div class="view-tabs dashboard-tabs" role="tablist" aria-label="Dashboard navigation">
+    <button type="button" data-tab="monitors">Monitors</button>
+    <button type="button" data-tab="notifications">Notifications</button>
+    <button type="button" data-tab="workspaces">Workspaces</button>
+  </div>
+  <div class="app-summary" id="summary" aria-live="polite"></div>
+  <div class="app-layout monitor-layout" id="view-monitors" data-view="monitors">
+    <section class="app-card monitor-sidebar">
+      <h2>Your monitors</h2>
+      <form id="monitorAdd" class="app-form">
+        <label>Website address<input type="text" inputmode="url" id="monitorUrl" placeholder="example.ge" maxlength="2048" required></label>
+        <button>Add to monitoring</button>
+      </form>
+      <div id="monitorList" class="fold-region"></div>
+      <div id="monitorPages" class="page-controls"></div>
+    </section>
+    <section class="app-card app-detail" id="monitorDetail" aria-label="Monitor details"><p class="muted">Select a monitor to see history and settings.</p></section>
+  </div>
+  <section class="app-secondary" id="view-notifications" data-view="notifications" hidden>
+    <section class="app-card">
+      <h2>Send test notification</h2>
+      <form id="testAlert" class="app-form app-test">
+        <label>Channel<select name="channel"><option value="email">Email</option><option value="sms">SMS</option><option value="telegram">Telegram</option></select></label>
+        <label>Monitor<select name="site" id="testSites"><option value="">Account</option></select></label>
+        <button class="ghost">Send test notification</button>
+      </form>
+      <p id="testFeedback" role="status"></p>
+    </section>
+    <section class="app-card dashboard-feed">
+      <h2>Delivery history</h2>
+      <div id="deliveries" class="fold-region"></div>
+    </section>
+  </section>
+  <section class="app-secondary" id="view-workspaces" data-view="workspaces" hidden>
+    <section class="app-card">
+      <h2>Create workspace</h2>
+      <form id="teamAdd" class="app-form">
+        <label>Workspace name<input name="name" maxlength="80" required></label><button class="ghost">Create workspace</button>
+      </form>
+    </section>
+    <section class="app-card dashboard-feed">
+      <h2>Workspaces</h2>
+      <div id="incomingInvites"></div>
+      <div id="workspaces" class="fold-region"></div>
+    </section>
+  </section>
+</main>
+<script type="module" src="/src/dashboard.js"></script>
+</body>
+</html>

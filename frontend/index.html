@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secura GE – Website security and monitoring</title>
+<meta name="description" content="Check a website's SSL, security headers and speed. Get an SMS on a Georgian number when it goes down.">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('sg_theme')||'dark'}catch(e){}</script>
+</head>
+<body class="frame landing-page" data-views>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="top">
+  <a class="logo" href="/"><img src="/logo.png" width="30" height="30" alt="">Secura<span>GE</span></a>
+  <div class="bar lbar">
+    <button type="button" class="ghost" id="mobileMenu" aria-controls="mainNav" aria-expanded="false">Menu</button>
+    <nav class="links landing-navigation" id="mainNav" aria-label="Main navigation">
+      <span role="tablist" aria-label="Link scanner"><a href="#scan" data-tab="scan">Link scanner</a><a href="#result" data-tab="result" id="resultTab" hidden>Scan results</a><a href="#how" data-tab="how">How it works</a><a href="#pricing" data-tab="pricing">Plans</a></span>
+      <a href="/reviews.html">Reviews</a><a href="/admin.html" id="adminLink" hidden>Admin panel</a>
+    </nav>
+  </div>
+  <div class="acct">
+    <div id="prefs" class="prefs"></div>
+    <a class="btn dashboard-entry" href="/dashboard.html" id="dashboardLink" hidden>My sites <span class="corner-arrow" aria-hidden="true"></span></a>
+    <button id="authBtn">Log in</button>
+    <a class="btn" href="/auth.html?signup" id="signupBtn">Sign up</a>
+    <a href="/profile.html" id="profileLink" aria-label="Your profile" hidden><span id="profileName"></span><span id="profileAv"></span></a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero landing-hero" id="scan" data-view="scan">
+    <div class="hero-copy">
+      <p class="hero-kicker"><span class="status-light" aria-hidden="true"></span>No sign-up needed</p>
+      <h1>Check your website.<span>Get an alert when it goes down.</span></h1>
+      <p class="lead">Check a link for technical security issues, or add your own site for ongoing monitoring.</p>
+      <form class="heroscan" id="scanForm">
+        <input id="url" inputmode="url" placeholder="example.ge" aria-label="Website address" autocapitalize="off" spellcheck="false" required>
+        <button>Scan</button>
+      </form>
+      <p id="msg" role="alert"></p>
+      <a class="hero-monitor" id="monitorCta" href="/dashboard.html">Monitor my site <span class="corner-arrow" aria-hidden="true"></span></a>
+    </div>
+    <aside class="scan-visual" aria-hidden="true">
+      <div class="scan-grid"></div>
+      <div class="scan-orbit"><div class="scan-center"><img src="/logo.png" width="86" height="86" alt=""></div></div>
+      <div class="orbit-marker orbit-marker-one"></div><div class="orbit-marker orbit-marker-two"></div>
+    </aside>
+    <div class="hero-facts">
+      <div><b>30 min</b><small>Check interval</small></div>
+      <div><b>TLS · DNS</b><small>External security checks</small></div>
+      <div><b>Email / SMS</b><small>Monitoring alerts</small></div>
+    </div>
+  </section>
+
+  <section class="result scan-result" id="result" data-view="result" hidden>
+    <div class="section-heading result-heading"><div><h2 id="rHost" class="mono" tabindex="-1"></h2><p id="rEvidence" class="app-caption"></p></div>
+      <button id="watchBtn">Add to monitoring</button>
+    </div>
+    <div class="scan-result-grid">
+      <div class="studio-card result-score">
+    <div class="gauge">
+      <svg width="180" height="180" viewBox="0 0 180 180" aria-hidden="true"><circle class="track" cx="90" cy="90" r="78" fill="none" stroke-width="12"/><circle class="v" id="arc" cx="90" cy="90" r="78" fill="none" stroke="#7c3aed" stroke-width="12" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490"/></svg>
+      <b id="score">0</b><small>out of 100</small>
+    </div>
+        <dl><dt>Status</dt><dd id="rStatus"></dd><dt>Response time</dt><dd id="rMs"></dd><dt>SSL</dt><dd id="rSsl"></dd></dl>
+        <p class="app-caption" id="rCoverage"></p>
+      </div>
+      <div class="studio-card result-detail" data-views>
+        <div class="view-tabs" role="tablist" aria-label="Scan results">
+          <button type="button" data-tab="checks">Checks</button><button type="button" data-tab="fixes">Recommended fixes</button>
+          <button type="button" data-tab="reputation">Link reputation</button><button type="button" data-tab="pdf" data-checkout>PDF report</button>
+        </div>
+        <section id="scan-checks" data-view="checks"><div class="hdrs" id="rHdrs"></div></section>
+        <section id="scan-fixes" data-view="fixes" hidden><ul class="scan-findings" id="rFindings"></ul></section>
+        <section id="scan-reputation" data-view="reputation" hidden>
+          <p class="app-caption">On request, Cloudflare checks the domain. When Google Cloud Web Risk is configured, it checks the domain and path without query parameters.</p>
+          <button type="button" class="ghost" id="reputationBtn">Check link reputation</button>
+          <p id="reputationResult" role="status"></p>
+        </section>
+        <section id="scan-pdf" data-view="pdf" hidden>
+      <div class="addon" data-checkout>
+        <input type="checkbox" id="withCode" aria-label="Include ready-to-paste fix code, plus 5 GEL">
+        <div><b>Include ready-to-paste fix code <span class="plus">+5 ₾</span></b><p>Get the exact code to paste into your server for every problem we find (Nginx, Apache, Node.js).</p></div>
+      </div>
+      <div class="lang-pick" data-checkout role="radiogroup" aria-label="Report language">
+        <span>Report language</span>
+        <button type="button" role="radio" aria-checked="true" data-rl="en">English</button>
+        <button type="button" role="radio" aria-checked="false" data-rl="ka">ქართული</button>
+      </div>
+      <button id="pdfBtn" data-checkout>Detailed PDF report – 5 ₾</button>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="how studio-how" id="how" data-view="how" hidden>
+    <div>
+      <h2>How it works</h2>
+      <p class="muted">From your first scan to your first alert.</p>
+    </div>
+    <ol>
+      <li><b>01</b><div><h3>Enter an address</h3><p>Just type <code>example.ge</code>. No account is needed to scan.</p></div></li>
+      <li><b>02</b><div><h3>Read the result</h3><p>We check TLS, browser security headers and email DNS settings, and show how long the server took to respond.</p></div></li>
+      <li><b>03</b><div><h3>Add to monitoring</h3><p>Add your site to monitor it every 30 minutes. Verify the domain to choose a shorter interval.</p></div></li>
+      <li><b>04</b><div><h3>Get the alerts</h3><p>If a site goes down, we send an email, and an SMS in paid plans, and again when it recovers.</p></div></li>
+    </ol>
+  </section>
+
+  <section id="pricing" class="studio-plans" data-view="pricing" hidden>
+    <h2>Plans</h2>
+    <p class="muted">Every plan lasts 30 days and does not renew automatically.</p>
+    <p class="muted" id="betaPlans" hidden>Checkout is unavailable during beta.</p>
+    <div class="plans" id="plans"></div>
+    <button class="ghost" id="cancelPlan" hidden>Cancel plan</button>
+  </section>
+</main>
+<footer class="site-footer"><span>© 2026 Secura GE</span><nav aria-label="Footer"><a href="/status.html">Service status</a><a href="/about.html#methods">Methodology</a><a href="/about.html#privacy">Privacy</a><a href="/about.html#terms">Terms</a><a href="/about.html#support">Support</a></nav></footer>
+
+<dialog id="payDlg">
+  <button type="button" class="close" id="payClose" aria-label="Close">✕</button>
+  <form id="payForm">
+    <h2 style="margin:0">Payment</h2>
+    <div class="sum"><span id="payTitle"></span><b id="payAmount"></b></div>
+    <p class="demo">Demo mode: no money is charged and card details are not sent anywhere. Do not enter a real card.</p>
+    <input id="cNum" inputmode="numeric" aria-label="Card number" value="4242 4242 4242 4242" pattern="[0-9 ]{19}" maxlength="19" autocomplete="off" required>
+    <div class="row2">
+      <input id="cExp" aria-label="Expiry date" value="12/30" pattern="\d\d/\d\d" maxlength="5" autocomplete="off" required>
+      <input id="cCvc" aria-label="CVC" value="123" pattern="\d{3}" maxlength="3" autocomplete="off" required>
+    </div>
+    <input id="cName" placeholder="Name on card" aria-label="Name on card" autocomplete="off" required>
+    <button id="payBtn">Pay</button>
+  </form>
+</dialog>
+<dialog id="okDlg">
+  <div class="okmark"><svg viewBox="0 0 52 52" width="68" height="68" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="#4ade80" stroke-width="3"/><path d="M15 27l8 8 14-16" fill="none" stroke="#4ade80" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <h2>Payment successful</h2>
+  <p id="okWhat" style="margin:0;font-weight:600"></p>
+  <p id="okText" class="muted"></p>
+  <button id="okBtn">OK</button>
+</dialog>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

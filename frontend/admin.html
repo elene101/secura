@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Secura GE – Admin</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('sg_theme')||'dark'}catch(e){}</script>
+</head>
+<body class="adminpage frame app-page">
+<header class="top">
+  <div class="logo"><img src="/logo.png" width="26" height="26" alt="">Secura<span>GE</span> · Admin</div>
+  <div class="bar">
+    <nav><a href="/">Back to site</a> <button class="ghost" id="logout" hidden>Log out</button></nav>
+  </div>
+  <div class="acct"><div id="prefs" class="prefs"></div></div>
+</header>
+<main id="main" class="app-main admin-main">
+  <div class="section-heading page-intro"><h1>Admin panel</h1></div>
+  <div id="login" hidden><p id="lMsg" role="status"></p></div>
+  <p id="adminAccess" hidden><a href="/auth.html">Log in</a> · <a href="/profile.html">Set up authenticator</a></p>
+  <div id="app" data-views hidden>
+    <div class="stats" id="stats"></div>
+    <div class="view-tabs" role="tablist" aria-label="Admin panel">
+      <button type="button" data-tab="users">Users</button>
+      <button type="button" data-tab="sites">Sites</button>
+      <button type="button" data-tab="reviews">Reviews</button>
+      <button type="button" data-tab="audit">Audit history</button>
+      <button type="button" data-tab="orders">Recent orders</button>
+    </div>
+    <section class="studio-card admin-data" id="admin-users" data-view="users" hidden><h2>Users</h2><div class="tbl fold-region"><table id="users"></table></div><div class="page-controls" id="users-pages"></div></section>
+    <section class="studio-card admin-data" id="admin-sites" data-view="sites" hidden><h2>Sites</h2><div class="tbl fold-region"><table id="sites"></table></div><div class="page-controls" id="sites-pages"></div></section>
+    <section class="studio-card admin-data" id="admin-reviews" data-view="reviews" hidden><h2>Reviews</h2><div class="tbl fold-region"><table id="reviews"></table></div><div class="page-controls" id="reviews-pages"></div></section>
+    <section class="studio-card admin-data" id="admin-audit" data-view="audit" hidden><h2>Audit history</h2><div class="tbl fold-region"><table id="audit"></table></div><div class="page-controls" id="audit-pages"></div></section>
+    <section class="studio-card admin-data" id="admin-orders" data-view="orders" hidden><h2>Recent orders</h2><div class="tbl fold-region"><table id="orders"></table></div><div class="page-controls" id="orders-pages"></div></section>
+  </div>
+</main>
+<script type="module" src="/src/admin.js"></script>
+</body>
+</html>
